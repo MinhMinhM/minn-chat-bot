@@ -12,5 +12,5 @@ func Register(r *echo.Echo) {
 	h := NewHandler()
 	// userRoute := r.Group("/registration", h.validateAdminRole)
 	testRoute := r.Group("/webhook")
-	testRoute.GET("", h.webhook)
+	testRoute.POST("", h.WebHook)
 }
