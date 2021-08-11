@@ -1,5 +1,13 @@
 package test
 
+import (
+	"bytes"
+	"encoding/json"
+	"io/ioutil"
+	"log"
+	"net/http"
+)
+
 type testService struct {
 	st ITestStore
 }
@@ -13,4 +21,51 @@ func NewTestService(st ITestStore) *testService {
 
 func (sv *testService) testSv() error {
 	return nil
+}
+
+func (sv *testService)replyMessageLine(Message ReplyMessage,ChannelToken string) error {
+	value, _ := json.Marshal(Message)
+
+	url := "https://api.line.me/v2/bot/message/reply"
+
+	var jsonStr = []byte(value)
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Add("Authorization", "Bearer "+ChannelToken)
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil
+	}
+	defer resp.Body.Close()
+
+	//log.Println("response Status:", resp.Status)
+	//log.Println("response Headers:", resp.Header)
+	//body, _ := ioutil.ReadAll(resp.Body)
+	//log.Println("response Body:", string(body))
+
+	return err
+}
+
+func (sv *testService)getProfile(userId string,ChannelToken string) string {
+
+	url := "https://api.line.me/v2/bot/profile/" + userId
+
+	req, _ := http.NewRequest("GET", url, nil)
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Add("Authorization", "Bearer "+ChannelToken)
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	var profile ProFile
+	if err := json.Unmarshal(body, &profile); err != nil {
+		log.Println("%% err \n")
+	}
+	//log.Println(profile.DisplayName)
+	return profile.DisplayName
+
 }
