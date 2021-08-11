@@ -6,18 +6,17 @@ import (
 	"github.com/line/line-bot-sdk-go/linebot"
 	"log"
 	"net/http"
+	"os"
 )
 
 type handler struct {
-	//authUser model.AuthUser
 	sv *testService
 
 }
 
 // NewHandler return +Handler
 func NewHandler() *handler {
-	// Inject service, store here!!
-
+	// Inject service here!!
 	store := NewTestStore()
 	service := NewTestService(store)
 	return &handler{
@@ -32,8 +31,8 @@ func (h *handler) webhaook(c echo.Context) error {
 
 func (h *handler)WebHook(c echo.Context) error {
 	//Initiate Line channel
-	ChannelToken:="Ys4yNEZl1H9WfRiyV9Db93+wR94d9Pk2q4AskWSEQB5bUyZCQNUngovXtk4qFd4f7HfwyZW0TAzvNisTqKa0QF54poGcsNXtDpNJQcFY+5Zc9mfy9lI+6MeRxU60aeOiSceoLlWjsi+FPc8ZEYxiVQdB04t89/1O/w1cDnyilFU="
-	ChannelSecret:="6c2154dbfbd911af13de10982e2db6cf"
+	ChannelToken:=os.Getenv("ChannelToken")
+	ChannelSecret:=os.Getenv("ChannelSecret")
 	bot, err := linebot.New(ChannelSecret, ChannelToken)
 	if err != nil {
 		log.Fatal(err)
@@ -54,26 +53,12 @@ func (h *handler)WebHook(c echo.Context) error {
 
 
 	if Line.Events[0].Message.Type=="location"{
-		//text := Text{}
-		//text = Text{
-		//	Type: "text",
-		//	Text: "Minh Golang Bot: ที่อยู่ของท่าน อยู่นอกเขตให้บริการ",
-		//}
-		//
-		//message := ReplyMessage{
-		//	ReplyToken: Line.Events[0].ReplyToken,
-		//	Messages:   []Text{text},
-		//}
-		//replyMessageLine(message)
-
 		// Unmarshal JSON
 		flexContainer, err := linebot.UnmarshalFlexMessageJSON(flexs)
 		if err != nil {
 			log.Println(err)
 		}
-		// New Flex Message
 		msg1:=linebot.NewTextMessage("พื้นที่ของท่าน อยู่ในเขตให้บริการ")
-
 		flexMessage := linebot.NewFlexMessage("FlexWithJSON", flexContainer)
 		bot.PushMessage(Line.Events[0].Source.UserID, msg1).Do()
 		bot.ReplyMessage(Line.Events[0].ReplyToken, flexMessage).Do()

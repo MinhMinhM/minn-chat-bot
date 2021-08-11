@@ -19,10 +19,6 @@ func NewTestService(st ITestStore) *testService {
 	}
 }
 
-func (sv *testService) testSv() error {
-	return nil
-}
-
 func (sv *testService)replyMessageLine(Message ReplyMessage,ChannelToken string) error {
 	value, _ := json.Marshal(Message)
 
