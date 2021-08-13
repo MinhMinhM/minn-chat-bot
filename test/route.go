@@ -9,5 +9,6 @@ import (
 func Register(r *echo.Echo) {
 	h := NewHandler()
 	testRoute := r.Group("/webhook")
-	testRoute.POST("", h.WebHook)
+	testRoute.POST("/MinhShop1", h.WebHook)
+	testRoute.POST("/MinhShop2", h.WebHook)
 }

@@ -24,15 +24,17 @@ func NewHandler() *handler {
 	}
 }
 
-func (h *handler) webhaook(c echo.Context) error {
-
-		return c.NoContent(http.StatusOK)
-	}
+//func (h *handler) getChannelToken(shopId string) echo.MiddlewareFunc {
+//		ChannelToken:=os.Getenv("ChannelToken")
+//		ChannelSecret:=os.Getenv("ChannelSecret")
+//		return nil
+//	}
 
 func (h *handler)WebHook(c echo.Context) error {
 	//Initiate Line channel
-	ChannelToken:=os.Getenv("ChannelToken")
-	ChannelSecret:=os.Getenv("ChannelSecret")
+	route:=c.Path()
+	ChannelToken:=os.Getenv("ChannelToken"+route[9:])
+	ChannelSecret:=os.Getenv("ChannelSecret"+route[9:])
 	bot, err := linebot.New(ChannelSecret, ChannelToken)
 	if err != nil {
 		log.Fatal(err)
