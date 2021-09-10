@@ -2,6 +2,7 @@ package test
 
 import (
 	"fmt"
+	"github.com/getsentry/sentry-go"
 	"github.com/labstack/echo/v4"
 	"github.com/line/line-bot-sdk-go/linebot"
 	"log"
@@ -31,6 +32,7 @@ func NewHandler() *handler {
 //	}
 
 func (h *handler)WebHook(c echo.Context) error {
+
 	//Initiate Line channel
 	route:=c.Path()
 	ChannelToken:=os.Getenv("ChannelToken"+route[9:])
@@ -97,7 +99,34 @@ func (h *handler)WebHook(c echo.Context) error {
 		return c.NoContent(http.StatusOK)
 	}
 
-	//log.Println("%% message success")
+
+
+	sentry.WithScope(func(scope *sentry.Scope) {
+		sentry.ConfigureScope(func(scope *sentry.Scope) {
+			scope.SetLevel(sentry.LevelWarning)
+			scope.SetUser(sentry.User{ID: fullname})
+			scope.SetTags(map[string]string{
+				"format": Line.Events[0].Message.Type,
+				"UserId":      fullname,
+			})
+		})
+
+		event := sentry.NewEvent()
+		event.Message = "Wrong Incoming Format"
+		sentry.CaptureEvent(event)
+	})
+
+
+
+	//sentry.CaptureMessage("Wrong text format")
+	//sentry.ConfigureScope(func(scope *sentry.Scope) {
+	//	//scope.SetExtra("oristhis", "justfantasy")
+	//	scope.SetTag("Wrong format:", Line.Events[0].Message.Type)
+	//	scope.SetLevel(sentry.LevelWarning)
+	//	scope.SetUser(sentry.User{
+	//		ID: fullname,
+	//	})
+	//})
 	return c.NoContent(http.StatusOK)
 }
 
