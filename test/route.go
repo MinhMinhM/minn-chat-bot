@@ -11,4 +11,5 @@ func Register(r *echo.Echo) {
 	testRoute := r.Group("/webhook")
 	testRoute.POST("/MinhShop1", h.WebHook)
 	testRoute.POST("/MinhShop2", h.WebHook)
+	testRoute.GET("/HealthCheck", h.HealthCheck)
 }

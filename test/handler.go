@@ -130,6 +130,11 @@ func (h *handler)WebHook(c echo.Context) error {
 	return c.NoContent(http.StatusOK)
 }
 
+func (h *handler)HealthCheck(c echo.Context) error {
+	fmt.Println("Here am I")
+	return c.JSON(http.StatusOK, "PASS")
+}
+
 
 
 
