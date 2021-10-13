@@ -38,6 +38,7 @@ func main() {
 	//connect to DB
 	mySql:= db.NewMySQLGorm()
 
+	//add mysql to base context before giving it to all service
 	ctx:=&core.BaseContext{
 		Mysql: mySql,
 	}

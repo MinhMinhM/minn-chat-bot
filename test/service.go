@@ -69,12 +69,12 @@ func (sv *testService)getProfile(userId string,ChannelToken string) string {
 
 }
 func (sv *testService)GetNameByIDService(id int) (*TestTable,error) {
-	DB,err:=sv.st.ProceedgetNameByID(id)
+	DB,err:=sv.st.ProceedGetNameByID(id)
 	return DB,err
 
 }
 func (sv *testService)AddNameToDB(name string,surname string) (*TestTable,error) {
-	result,err:=sv.st.ProceedgetAddName(name,surname)
+	result,err:=sv.st.ProceedGetAddName(name,surname)
 	return result,err
 
 }

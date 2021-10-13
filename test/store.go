@@ -12,8 +12,8 @@ type TestStore struct {
 
 //ITestStore controlled interface
 type ITestStore interface {
-	ProceedgetNameByID(id int) (*TestTable, error)
-	ProceedgetAddName(name string,sirname string) (*TestTable, error)
+	ProceedGetNameByID(id int) (*TestTable, error)
+	ProceedGetAddName(name string,sirname string) (*TestTable, error)
 }
 
 //NewTestStore return test st instance
@@ -24,13 +24,13 @@ func NewTestStore(ctx *core.BaseContext) *TestStore {
 }
 
 //Get Name by ID
-func (st *TestStore) ProceedgetNameByID(id int) (*TestTable, error) {
+func (st *TestStore) ProceedGetNameByID(id int) (*TestTable, error) {
 	MinhDB:=&TestTable{Id: id}
 	err:=st.db.Where(MinhDB).Find(MinhDB).Error
 	return MinhDB, err
 }
 //Insert Name
-func (st *TestStore) ProceedgetAddName(name string,surname string) (*TestTable, error) {
+func (st *TestStore) ProceedGetAddName(name string,surname string) (*TestTable, error) {
 	MinhDB:=&TestTable{Name: name,Surname: surname}
 	err:=st.db.Create(MinhDB).Error
 	return MinhDB, err
