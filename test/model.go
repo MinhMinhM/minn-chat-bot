@@ -118,3 +118,15 @@ type ContentFlex struct {
 	Type string `json:"type"`
 	Text string `json:"text"`
 }
+
+type TestTable struct {
+	id int `json:"id"`
+	name string `json:"name"`
+}
+//type TestTable struct {
+//	id int `gorm:"type:int"`
+//	name string `gorm:"type:varchar(64)"`
+//}
+func (u *TestTable)TableName() string{
+	return "test_tables"
+}

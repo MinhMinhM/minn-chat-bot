@@ -5,17 +5,20 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"minh-chat-bot/core"
 	"net/http"
 )
 
 type testService struct {
 	st ITestStore
+	ctx *core.BaseContext
 }
 
 //NewTestService service prototype
-func NewTestService(st ITestStore) *testService {
+func NewTestService(ctx *core.BaseContext,st ITestStore) *testService {
 	return &testService{
 		st: st,
+		ctx: ctx,
 	}
 }
 
@@ -63,5 +66,10 @@ func (sv *testService)getProfile(userId string,ChannelToken string) string {
 	}
 	//log.Println(profile.DisplayName)
 	return profile.DisplayName
+
+}
+func (sv *testService)getDatabase() (string,error) {
+	DB,err:=sv.st.getNameByID()
+	return DB.name,err
 
 }

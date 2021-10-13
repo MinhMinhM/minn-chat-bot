@@ -4,10 +4,13 @@
 package main
 
 import (
+	"fmt"
 	"github.com/getsentry/sentry-go"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"log"
+	"minh-chat-bot/core"
+	"minh-chat-bot/db"
 	"minh-chat-bot/test"
 	"os"
 	"time"
@@ -29,11 +32,18 @@ func main() {
 	//load /env file
 	err=godotenv.Load(".env")
 	if err != nil {
-		println("Cannot load .env file")
+		fmt.Println("Cannot load .env file")
+	}
+
+	//connect to DB
+	mySql:= db.NewMySQLGorm()
+
+	ctx:=&core.BaseContext{
+		Mysql: mySql,
 	}
 	//initiate echo and register service
 	r := echo.New()
-	registerAllServices(r)
+	registerAllServices(r,ctx)
 
 	//get and open port
 	port:=os.Getenv("port")
@@ -41,10 +51,10 @@ func main() {
 }
 
 
-func registerAllServices(r *echo.Echo) {
-	registerTestService(r)
+func registerAllServices(r *echo.Echo,ctx *core.BaseContext) {
+	registerTestService(r,ctx)
 }
 
-func registerTestService(r *echo.Echo) {
-	test.Register(r)
+func registerTestService(r *echo.Echo,ctx *core.BaseContext) {
+	test.Register(r,ctx)
 }

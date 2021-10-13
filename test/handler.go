@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/line/line-bot-sdk-go/linebot"
 	"log"
+	"minh-chat-bot/core"
 	"net/http"
 	"os"
 )
@@ -16,10 +17,10 @@ type handler struct {
 }
 
 // NewHandler return +Handler
-func NewHandler() *handler {
+func NewHandler(ctx *core.BaseContext) *handler {
 	// Inject service here!!
-	store := NewTestStore()
-	service := NewTestService(store)
+	store := NewTestStore(ctx)
+	service := NewTestService(ctx,store)
 	return &handler{
 		sv: service,
 	}
@@ -132,8 +133,15 @@ func (h *handler)WebHook(c echo.Context) error {
 
 func (h *handler)HealthCheck(c echo.Context) error {
 	fmt.Println("Here am I")
-	return c.JSON(http.StatusOK, "PASS")
+	name,err:=h.sv.getDatabase()
+	fmt.Println("Name:"+name)
+	if err!= nil{
+		return c.JSON(http.StatusOK, "Get DB fail")
+	}
+	return c.JSON(http.StatusOK, name)
 }
+
+
 
 
 
