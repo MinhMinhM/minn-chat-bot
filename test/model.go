@@ -122,7 +122,7 @@ type ContentFlex struct {
 type TestTable struct {
 	Id int `json:"id"`
 	Name string `json:"name"`
-	Sirname string `json:"sirname"`
+	Surname string `json:"surname"`
 }
 //type TestTable struct {
 //	id int `gorm:"type:int"`

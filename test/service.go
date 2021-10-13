@@ -73,3 +73,8 @@ func (sv *testService)GetNameByIDService(id int) (*TestTable,error) {
 	return DB,err
 
 }
+func (sv *testService)AddNameToDB(name string,surname string) (*TestTable,error) {
+	result,err:=sv.st.ProceedgetAddName(name,surname)
+	return result,err
+
+}

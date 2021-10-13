@@ -143,6 +143,18 @@ func (h *handler)GetNameByID(c echo.Context) error {
 	return c.JSON(http.StatusOK, name)
 }
 
+func (h *handler)AddName(c echo.Context) error {
+	name:=c.FormValue("name")
+	surname:=c.FormValue("surname")
+
+	result,err:=h.sv.AddNameToDB(name,surname)
+
+	if err!= nil{
+		return c.JSON(http.StatusOK, "Get DB fail")
+	}
+	return c.JSON(http.StatusOK, result)
+}
+
 
 
 
