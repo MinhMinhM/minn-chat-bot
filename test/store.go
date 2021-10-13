@@ -1,7 +1,6 @@
 package test
 
 import (
-	"fmt"
 	"gorm.io/gorm"
 	"minh-chat-bot/core"
 )
@@ -13,7 +12,7 @@ type TestStore struct {
 
 //ITestStore controlled interface
 type ITestStore interface {
-	getNameByID() (*TestTable, error)
+	ProceedgetNameByID(id int) (*TestTable, error)
 }
 
 //NewTestStore return test st instance
@@ -24,11 +23,8 @@ func NewTestStore(ctx *core.BaseContext) *TestStore {
 }
 
 //InsertNewItem InsertNewItem store
-func (st *TestStore) getNameByID() (*TestTable, error) {
-	MinhDB:=&TestTable{}
-	//result := st.db.Debug().Table("MinhDatabase.test_tables").Where("id=1").Find(MinhDB)
-	st.db.Debug().Where("id = ?", 1).Find(MinhDB)
-	fmt.Println(MinhDB)
-	//st.db.Table("test_tables").Where(&TestTable{id: 1}).Find(MinhDB)
-	return MinhDB, nil
+func (st *TestStore) ProceedgetNameByID(id int) (*TestTable, error) {
+	MinhDB:=&TestTable{Id: id}
+	err:=st.db.Where(MinhDB).Find(MinhDB).Error
+	return MinhDB, err
 }

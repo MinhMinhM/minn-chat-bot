@@ -9,6 +9,7 @@ import (
 	"minh-chat-bot/core"
 	"net/http"
 	"os"
+	"strconv"
 )
 
 type handler struct {
@@ -131,10 +132,11 @@ func (h *handler)WebHook(c echo.Context) error {
 	return c.NoContent(http.StatusOK)
 }
 
-func (h *handler)HealthCheck(c echo.Context) error {
-	fmt.Println("Here am I")
-	name,err:=h.sv.getDatabase()
-	fmt.Println("Name:"+name)
+func (h *handler)GetNameByID(c echo.Context) error {
+	id:=c.FormValue("id")
+	idInt, err := strconv.Atoi(id)
+	name,err:=h.sv.GetNameByIDService(idInt)
+
 	if err!= nil{
 		return c.JSON(http.StatusOK, "Get DB fail")
 	}

@@ -68,8 +68,8 @@ func (sv *testService)getProfile(userId string,ChannelToken string) string {
 	return profile.DisplayName
 
 }
-func (sv *testService)getDatabase() (string,error) {
-	DB,err:=sv.st.getNameByID()
-	return DB.name,err
+func (sv *testService)GetNameByIDService(id int) (*TestTable,error) {
+	DB,err:=sv.st.ProceedgetNameByID(id)
+	return DB,err
 
 }
