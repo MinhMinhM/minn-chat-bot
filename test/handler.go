@@ -1,12 +1,14 @@
 package test
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/getsentry/sentry-go"
 	"github.com/labstack/echo/v4"
 	"github.com/line/line-bot-sdk-go/linebot"
 	"log"
 	"minh-chat-bot/core"
+	//"minh-chat-bot/vendor/github.com/labstack/echo/v4"
 	"net/http"
 	"os"
 	"strconv"
@@ -153,6 +155,22 @@ func (h *handler)AddName(c echo.Context) error {
 		return c.JSON(http.StatusOK, "Get DB fail")
 	}
 	return c.JSON(http.StatusOK, result)
+}
+
+func (h *handler)WebHookFormStack(c echo.Context) error {
+	var result map[string]interface{}
+	err := json.NewDecoder(c.Request().Body).Decode(&result)
+	if err!= nil{
+		return c.JSON(http.StatusOK, "Get DB fail")
+	}
+	fmt.Println(result["Agent Email"])
+	fmt.Println(result)
+
+
+	//json.Unmarshal(IncomingJson, &result)
+
+
+	return c.JSON(http.StatusOK, nil)
 }
 
 
