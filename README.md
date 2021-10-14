@@ -1,7 +1,7 @@
 # LineChatBot
 Golang LineChatbot
 
-//Install
+/////////Install
 -Line golang sdk
 -Echo
 
@@ -13,11 +13,11 @@ $go mod vendor
 
 //Run Using
 $go run *.go
-*Run ngrok that connect to the opening port
+*Run ngrok that connect to the opening port to expose port to internet
 
 
 
-//For docker
+/////////For docker
 //pull image
 $docker run -dp 1000:2000 minhminhh12/minhlinebot:minh-chat-bot
 
@@ -26,3 +26,15 @@ docker images
 
 //run image
 $docker run {image ID}
+
+
+////////for mysql docker
+
+//create user to connect via all ip address
+CREATE USER 'admin'@'%' IDENTIFIED BY 'the_secure_password';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%';
+FLUSH PRIVILEGES;
+
+////////ngrok for mysqlDocker
+./ngork tcp -ap 3306
+then get an public ip and port 

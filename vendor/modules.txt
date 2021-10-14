@@ -1,9 +1,3 @@
-# github.com/denisenkom/go-mssqldb v0.11.0
-github.com/denisenkom/go-mssqldb
-github.com/denisenkom/go-mssqldb/internal/cp
-github.com/denisenkom/go-mssqldb/internal/decimal
-github.com/denisenkom/go-mssqldb/internal/querytext
-github.com/denisenkom/go-mssqldb/msdsn
 # github.com/getsentry/sentry-go v0.11.0
 ## explicit
 github.com/getsentry/sentry-go
@@ -12,8 +6,6 @@ github.com/getsentry/sentry-go/internal/debug
 github.com/getsentry/sentry-go/internal/ratelimit
 # github.com/go-sql-driver/mysql v1.6.0
 github.com/go-sql-driver/mysql
-# github.com/golang-sql/civil v0.0.0-20190719163853-cb61b32ac6fe
-github.com/golang-sql/civil
 # github.com/jinzhu/inflection v1.0.0
 github.com/jinzhu/inflection
 # github.com/jinzhu/now v1.1.2
@@ -39,9 +31,9 @@ github.com/valyala/bytebufferpool
 # github.com/valyala/fasttemplate v1.2.1
 github.com/valyala/fasttemplate
 # golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
+## explicit
 golang.org/x/crypto/acme
 golang.org/x/crypto/acme/autocert
-golang.org/x/crypto/md4
 # golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4
 golang.org/x/net/http/httpguts
 golang.org/x/net/http2
@@ -59,9 +51,6 @@ golang.org/x/text/unicode/norm
 # gorm.io/driver/mysql v1.1.2
 ## explicit
 gorm.io/driver/mysql
-# gorm.io/driver/sqlserver v1.1.0
-## explicit
-gorm.io/driver/sqlserver
 # gorm.io/gorm v1.21.16
 ## explicit
 gorm.io/gorm
