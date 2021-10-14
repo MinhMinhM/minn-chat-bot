@@ -158,6 +158,7 @@ func (h *handler)AddName(c echo.Context) error {
 }
 
 func (h *handler)WebHookFormStack(c echo.Context) error {
+	//json for unstructed
 	var result map[string]interface{}
 	err := json.NewDecoder(c.Request().Body).Decode(&result)
 	if err!= nil{
@@ -165,9 +166,6 @@ func (h *handler)WebHookFormStack(c echo.Context) error {
 	}
 	fmt.Println(result["Agent Email"])
 	fmt.Println(result)
-
-
-	//json.Unmarshal(IncomingJson, &result)
 
 
 	return c.JSON(http.StatusOK, nil)
