@@ -14,6 +14,8 @@ type TestStore struct {
 type ITestStore interface {
 	ProceedGetNameByID(id int) (*TestTable, error)
 	ProceedGetAddName(name string,sirname string) (*TestTable, error)
+	ProceedAddForm(form1 *Form1) (*Form1, error)
+	ProceedGetCustomerInfoByUid(uid int) (*Form1Request, error)
 }
 
 //NewTestStore return test st instance
@@ -34,4 +36,16 @@ func (st *TestStore) ProceedGetAddName(name string,surname string) (*TestTable, 
 	MinhDB:=&TestTable{Name: name,Surname: surname}
 	err:=st.db.Create(MinhDB).Error
 	return MinhDB, err
+}
+
+func (st *TestStore) ProceedAddForm(form1 *Form1) (*Form1, error) {
+
+	err:=st.db.Create(form1).Error
+	return form1, err
+}
+
+func (st *TestStore) ProceedGetCustomerInfoByUid(uid int) (*Form1Request, error) {
+	data:=&Form1Request{UniqueId: uid}
+	err:=st.db.Where(data).Find(data).Error
+	return data, err
 }

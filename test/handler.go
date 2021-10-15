@@ -6,8 +6,11 @@ import (
 	"github.com/getsentry/sentry-go"
 	"github.com/labstack/echo/v4"
 	"github.com/line/line-bot-sdk-go/linebot"
+	"io/ioutil"
 	"log"
 	"minh-chat-bot/core"
+	"time"
+
 	//"minh-chat-bot/vendor/github.com/labstack/echo/v4"
 	"net/http"
 	"os"
@@ -158,19 +161,71 @@ func (h *handler)AddName(c echo.Context) error {
 }
 
 func (h *handler)WebHookFormStack(c echo.Context) error {
-	//json for unstructed
-	var result map[string]interface{}
-	err := json.NewDecoder(c.Request().Body).Decode(&result)
+	////json for unstructed
+	//var result map[string]interface{}
+	//err := json.NewDecoder(c.Request().Body).Decode(&result)
+	//fmt.Println(result)
+	//UniqueIdInt, err := strconv.Atoi(result["UniqueID"].(string))
+	//data:=&Form1{
+	//	DateSubmitted: time.Now(),
+	//	UniqueId: UniqueIdInt,
+	//	AgentEmail: result["Agent Email"].(string),
+	//	RegisService: result["บริการที่สมัคร"].(string),
+	//	File1TS: result["File1 True store"].(string),
+	//	File2TS: result["File2 True store"].(string),
+	//	TelephoneNo: result["บอร์ที่ใช้ในการสมัครบริการ:"].(string),
+	//	SecondTelephoneNo: result["เบอร์ติดต่อสำรอง:"].(string),
+	//	ShippingAddress: result["ที่อยู่ในการจัดส่ง"].(string),
+	//	IsTax: result["ใบกำกับภาษี:"].(string),
+	//	NameSurname: result["ชื่อ-นามสกุล"].(string),
+	//	NationalID: result["เลขบัตรประชาชน"].(string),
+	//	TaxAddress: result["ที่อยู่สำหรับใบกำกับภาษี"].(string),
+	//	TaxName: result["ชื่อ-นามสกุล"].(string),
+	//	TaxNationalID: result["เลขบัตรประชาชน"].(string),
+	//	File1Ekyc: result["File1 ekyc"].(string),
+	//	File2Ekyc: result["File2 ekyc"].(string),
+	//	Signature: result["Signature"].(string),
+	//}
+
+
+	jsonData, err := ioutil.ReadAll(c.Request().Body)
+	data:=&Form1{}
+	json.Unmarshal(jsonData, data)
+	fmt.Printf("%+v\n", data)
+
+	data.DateSubmitted=time.Now()
+	_,err=h.sv.AddFormToDB(data)
+
 	if err!= nil{
 		return c.JSON(http.StatusOK, "Get DB fail")
 	}
-	fmt.Println(result["Agent Email"])
-	fmt.Println(result)
+	//fmt.Println(result["Agent Email"])
+	//fmt.Println(result)
 
 
 	return c.JSON(http.StatusOK, nil)
 }
 
+
+func (h *handler)HealthCheck(c echo.Context) error {
+	var result map[string]interface{}
+	_ = json.NewDecoder(c.Request().Body).Decode(&result)
+	fmt.Println(result)
+	return c.JSON(http.StatusOK, nil)
+}
+
+
+func (h *handler)GetCustomerInfo(c echo.Context) error {
+	uid:=c.FormValue("UID")
+	uidInt, err := strconv.Atoi(uid)
+
+	result,err:=h.sv.GetCustomerInfoByUid(uidInt)
+
+	if err!= nil{
+		return c.JSON(http.StatusOK, "Get DB fail")
+	}
+	return c.JSON(http.StatusOK, result)
+}
 
 
 

@@ -76,5 +76,14 @@ func (sv *testService)GetNameByIDService(id int) (*TestTable,error) {
 func (sv *testService)AddNameToDB(name string,surname string) (*TestTable,error) {
 	result,err:=sv.st.ProceedGetAddName(name,surname)
 	return result,err
+}
 
+func (sv *testService)AddFormToDB(form1 *Form1) (*Form1,error) {
+	result,err:=sv.st.ProceedAddForm(form1)
+	return result,err
+}
+
+func (sv *testService)GetCustomerInfoByUid(uid int) (*Form1Request,error) {
+	result,err:=sv.st.ProceedGetCustomerInfoByUid(uid)
+	return result,err
 }
