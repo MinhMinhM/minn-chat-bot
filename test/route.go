@@ -10,14 +10,13 @@ import (
 func Register(r *echo.Echo,ctx *core.BaseContext) {
 	h := NewHandler(ctx)
 	testRoute := r.Group("/webhook")
+	testRoute.POST("/HealthCheck", h.HealthCheck)
 	testRoute.POST("/MinhShop1", h.WebHook)
 	testRoute.POST("/MinhShop2", h.WebHook)
 	testRoute.POST("/FormStack", h.WebHookFormStack)
-	testRoute.POST("/HealthCheck", h.HealthCheck)
+
 
 	DBroute := r.Group("/DB")
-	DBroute.GET("/GetNameByID", h.GetNameByID)
-	DBroute.POST("/AddName", h.AddName)
 	DBroute.POST("/GetCustomerInfo", h.GetCustomerInfo)
 
 }

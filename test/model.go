@@ -1,7 +1,5 @@
 package test
 
-import "time"
-
 type LineMessage struct {
 	Destination string 		`json:"destination"`
 	Events      []struct {
@@ -120,85 +118,50 @@ type ContentFlex struct {
 	Text string `json:"text"`
 }
 
-type TestTable struct {
-	Id int `json:"id"`
-	Name string `json:"name"`
-	Surname string `json:"surname"`
-}
-//type TestTable struct {
-//	id int `gorm:"type:int"`
-//	name string `gorm:"type:varchar(64)"`
+
+
+
+//type Form1Json struct {
+//	DateSubmitted time.Time `json:"date_submitted"`
+//	UniqueId int `json:"UniqueID"`
+//	AgentEmail string `json:"Agent Email"`
+//	RegisService string `json:"บริการที่สมัคร"`
+//	File1TS string `json:"File1 True store"`
+//	File2TS string `json:"File2 True store"`
+//	TelephoneNo string `json:"บอร์ที่ใช้ในการสมัครบริการ"`
+//	SecondTelephoneNo string `json:"เบอร์ติดต่อสำรอง"`
+//	ShippingAddress string `json:"ที่อยู่ในการจัดส่ง"`
+//	IsTax string `json:"ใบกำกับภาษี"`
+//	NameSurname string `json:"ชื่อ-นามสกุล"`
+//	NationalID string `json:"เลขบัตรประชาชน"`
+//	TaxAddress string `json:"ที่อยู่สำหรับใบกำกับภาษี"`
+//	TaxName string `json:"ชื่อ-นามสกุล"`
+//	TaxNationalID string `json:"เลขบัตรประชาชน"`
+//	File1Ekyc string `json:"File1 ekyc"`
+//	File2Ekyc string `json:"File2 ekyc"`
+//	Signature string `json:"Signature"`
 //}
-func (u *TestTable)TableName() string{
-	return "test_tables"
-}
 
-type Form1 struct {
-	DateSubmitted time.Time `json:"date_submitted"`
-	UniqueId int `json:"unique_id"`
-	AgentEmail string `json:"agent_email"`
-	RegisService string `json:"regis_service"`
-	File1TS string `json:"file1_ts"`
-	File2TS string `json:"file2_ts"`
-	TelephoneNo string `json:"telephone_no"`
-	SecondTelephoneNo string `json:"second_telephone_no"`
-	ShippingAddress string `json:"shipping_address"`
-	IsTax string `json:"is_tax"`
-	NameSurname string `json:"name_surname"`
-	NationalID string `json:"national_id"`
-	TaxAddress string `json:"tax_address"`
-	TaxName string `json:"tax_name"`
-	TaxNationalID string `json:"tax_national_id"`
-	File1Ekyc string `json:"file1_ekyc"`
-	File2Ekyc string `json:"file2_ekyc"`
-	Signature string `json:"signature"`
-}
-
-func (u *Form1)TableName() string{
-	return "form1"
-}
-
-type Form1Json struct {
-	DateSubmitted time.Time `json:"date_submitted"`
-	UniqueId int `json:"UniqueID"`
-	AgentEmail string `json:"Agent Email"`
-	RegisService string `json:"บริการที่สมัคร"`
-	File1TS string `json:"File1 True store"`
-	File2TS string `json:"File2 True store"`
-	TelephoneNo string `json:"บอร์ที่ใช้ในการสมัครบริการ"`
-	SecondTelephoneNo string `json:"เบอร์ติดต่อสำรอง"`
-	ShippingAddress string `json:"ที่อยู่ในการจัดส่ง"`
-	IsTax string `json:"ใบกำกับภาษี"`
-	NameSurname string `json:"ชื่อ-นามสกุล"`
-	NationalID string `json:"เลขบัตรประชาชน"`
-	TaxAddress string `json:"ที่อยู่สำหรับใบกำกับภาษี"`
-	TaxName string `json:"ชื่อ-นามสกุล"`
-	TaxNationalID string `json:"เลขบัตรประชาชน"`
-	File1Ekyc string `json:"File1 ekyc"`
-	File2Ekyc string `json:"File2 ekyc"`
-	Signature string `json:"Signature"`
-}
-
-type Form1Request struct {
-	UniqueId int `json:"unique_id"`
-	AgentEmail string `json:"agent_email"`
-	RegisService string `json:"regis_service"`
-	File1TS string `json:"file1_ts"`
-	File2TS string `json:"file2_ts"`
-	TelephoneNo string `json:"telephone_no"`
-	SecondTelephoneNo string `json:"second_telephone_no"`
-	ShippingAddress string `json:"shipping_address"`
-	IsTax string `json:"is_tax"`
-	NameSurname string `json:"name_surname"`
-	NationalID string `json:"national_id"`
-	TaxAddress string `json:"tax_address"`
-	TaxName string `json:"tax_name"`
-	TaxNationalID string `json:"tax_national_id"`
-	File1Ekyc string `json:"file1_ekyc"`
-	File2Ekyc string `json:"file2_ekyc"`
-	Signature string `json:"signature"`
-}
-
-func (u *Form1Request)TableName() string{
-	return "form1"
-}
+//type Form1Request struct {
+//	UniqueId int `json:"unique_id"`
+//	AgentEmail string `json:"agent_email"`
+//	RegisService string `json:"regis_service"`
+//	File1TS string `json:"file1_ts"`
+//	File2TS string `json:"file2_ts"`
+//	TelephoneNo string `json:"telephone_no"`
+//	SecondTelephoneNo string `json:"second_telephone_no"`
+//	ShippingAddress string `json:"shipping_address"`
+//	IsTax string `json:"is_tax"`
+//	NameSurname string `json:"name_surname"`
+//	NationalID string `json:"national_id"`
+//	TaxAddress string `json:"tax_address"`
+//	TaxName string `json:"tax_name"`
+//	TaxNationalID string `json:"tax_national_id"`
+//	File1Ekyc string `json:"file1_ekyc"`
+//	File2Ekyc string `json:"file2_ekyc"`
+//	Signature string `json:"signature"`
+//}
+//
+//func (u *Form1Request)TableName() string{
+//	return "form1"
+//}

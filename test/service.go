@@ -7,6 +7,7 @@ import (
 	"log"
 	"minh-chat-bot/core"
 	"net/http"
+	"errors"
 )
 
 type testService struct {
@@ -68,22 +69,18 @@ func (sv *testService)getProfile(userId string,ChannelToken string) string {
 	return profile.DisplayName
 
 }
-func (sv *testService)GetNameByIDService(id int) (*TestTable,error) {
-	DB,err:=sv.st.ProceedGetNameByID(id)
-	return DB,err
 
-}
-func (sv *testService)AddNameToDB(name string,surname string) (*TestTable,error) {
-	result,err:=sv.st.ProceedGetAddName(name,surname)
-	return result,err
-}
-
-func (sv *testService)AddFormToDB(form1 *Form1) (*Form1,error) {
+func (sv *testService)AddFormToDB(form1 *Form1Request) (*Form1Request,error) {
 	result,err:=sv.st.ProceedAddForm(form1)
 	return result,err
 }
 
-func (sv *testService)GetCustomerInfoByUid(uid int) (*Form1Request,error) {
-	result,err:=sv.st.ProceedGetCustomerInfoByUid(uid)
-	return result,err
+func (sv *testService)GetCustomerInfoByUid(uid int,agentEmail string) (*Form1Response,error) {
+	data,err:=sv.st.ProceedGetCustomerInfoByUid(uid,agentEmail)
+	if err.Error!=nil{
+		return nil,errors.New("DB error")
+	}else if err.RowsAffected==0 {
+		return nil,errors.New("data not found")
+	}
+	return data,nil
 }

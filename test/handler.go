@@ -9,8 +9,6 @@ import (
 	"io/ioutil"
 	"log"
 	"minh-chat-bot/core"
-	"time"
-
 	//"minh-chat-bot/vendor/github.com/labstack/echo/v4"
 	"net/http"
 	"os"
@@ -137,28 +135,6 @@ func (h *handler)WebHook(c echo.Context) error {
 	return c.NoContent(http.StatusOK)
 }
 
-func (h *handler)GetNameByID(c echo.Context) error {
-	id:=c.FormValue("id")
-	idInt, err := strconv.Atoi(id)
-	name,err:=h.sv.GetNameByIDService(idInt)
-
-	if err!= nil{
-		return c.JSON(http.StatusOK, "Get DB fail")
-	}
-	return c.JSON(http.StatusOK, name)
-}
-
-func (h *handler)AddName(c echo.Context) error {
-	name:=c.FormValue("name")
-	surname:=c.FormValue("surname")
-
-	result,err:=h.sv.AddNameToDB(name,surname)
-
-	if err!= nil{
-		return c.JSON(http.StatusOK, "Get DB fail")
-	}
-	return c.JSON(http.StatusOK, result)
-}
 
 func (h *handler)WebHookFormStack(c echo.Context) error {
 	////json for unstructed
@@ -189,11 +165,8 @@ func (h *handler)WebHookFormStack(c echo.Context) error {
 
 
 	jsonData, err := ioutil.ReadAll(c.Request().Body)
-	data:=&Form1{}
+	data:=&Form1Request{}
 	json.Unmarshal(jsonData, data)
-	fmt.Printf("%+v\n", data)
-
-	data.DateSubmitted=time.Now()
 	_,err=h.sv.AddFormToDB(data)
 
 	if err!= nil{
@@ -208,21 +181,23 @@ func (h *handler)WebHookFormStack(c echo.Context) error {
 
 
 func (h *handler)HealthCheck(c echo.Context) error {
-	var result map[string]interface{}
-	_ = json.NewDecoder(c.Request().Body).Decode(&result)
-	fmt.Println(result)
-	return c.JSON(http.StatusOK, nil)
+	//var result map[string]interface{}
+	//_ = json.NewDecoder(c.Request().Body).Decode(&result)
+	//fmt.Println(result)
+	return c.JSON(http.StatusOK, "Success")
 }
 
 
 func (h *handler)GetCustomerInfo(c echo.Context) error {
+	//incoming DATA
 	uid:=c.FormValue("UID")
+	agentEmail:=c.FormValue("Agent Email")
 	uidInt, err := strconv.Atoi(uid)
 
-	result,err:=h.sv.GetCustomerInfoByUid(uidInt)
-
+	//Get customer INFO
+	result,err:=h.sv.GetCustomerInfoByUid(uidInt,agentEmail)
 	if err!= nil{
-		return c.JSON(http.StatusOK, "Get DB fail")
+		return c.JSON(http.StatusBadRequest, err.Error())
 	}
 	return c.JSON(http.StatusOK, result)
 }
