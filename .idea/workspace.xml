@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08ea06eb-423f-48c4-b00c-d18734a60fec" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/dto_request.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/dto_response.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/route.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/route.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/store.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/store.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/jinzhu/copier/License" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/jinzhu/copier/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/jinzhu/copier/copier.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/jinzhu/copier/errors.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/jinzhu/copier/go.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/modules.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/modules.txt" afterDir="false" />
-    </list>
+    <list default="true" id="08ea06eb-423f-48c4-b00c-d18734a60fec" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +17,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../Program Files/Go" />
+  <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -70,7 +52,7 @@
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="go.vendoring.notification.had.been.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="go.sdk" />
+    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
